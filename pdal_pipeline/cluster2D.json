@@ -1,0 +1,15 @@
+[
+    "PTS_LAMB93_IGN69_0923_6308.laz",
+    {
+        "type":"filters.cluster",
+        "where":"Classification == 6",
+        "min_points":200,
+        "is3d": "false"
+    },
+    {
+        "type":"writers.las",
+        "filename":"cluster2d.laz",
+        "minor_version":4,
+        "extra_dims":"all"
+    }
+]
