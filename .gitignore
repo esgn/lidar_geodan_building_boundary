@@ -1,2 +1,5 @@
 *.laz
 !PTS_LAMB93_IGN69_0923_6308.laz
+*.las
+*.geojson
+venv/

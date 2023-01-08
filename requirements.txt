@@ -1,0 +1,7 @@
+laspy[lazrs,laszip]
+# Necessary to prevent "module 'numpy' has no attribute 'bool'" when using geodan building-boundary
+numpy==1.23.1
+geopandas
+# Necessary to visualize results from scripts directly
+# matplotlib
+# open3D
