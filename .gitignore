@@ -3,3 +3,5 @@
 *.las
 *.geojson
 venv/
+*.txt
+.vscode/

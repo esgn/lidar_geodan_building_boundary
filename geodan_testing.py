@@ -7,6 +7,8 @@ from shapely.geometry import Polygon
 # import open3d as o3d
 import matplotlib.pyplot as plt
 import os, shutil
+from scipy.spatial import Delaunay
+import traceback
 
 # Input can be cluster taking into account Z or not
 # input_laz = 'cluster3d.laz'
@@ -39,8 +41,8 @@ clusterid_not_found = []
 for i in range(cluster_min+1,cluster_max+1):
     
     # To check a specific cluster
-    # if (i!=139) and (i!=72):
-    #     continue
+    if (i!=10):
+        continue
 
     print("dealing with cluster " + str(i))
     cluster = laz.points[laz.ClusterID == i]
@@ -61,9 +63,19 @@ for i in range(cluster_min+1,cluster_max+1):
     cluster_xy = np.column_stack((X,Y))
 
     # Testing compute_shape
-    shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.5, k=5)
+    found = False
+    try:
+        shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.5, k=None)
+        found = True
+    except:
+        traceback.print_exc()
 
     # In order to visualize cluster points and generated footprint
-    plt.scatter(X, Y)
-    plt.plot(*shape.exterior.xy)
+    # plt.scatter(X, Y)
+    tri = Delaunay(cluster_xy)
+    plt.triplot(X, Y, tri.simplices,linewidth=0.5)
+    if found:
+        plt.plot(*shape.exterior.xy, color="red", linewidth=2)
     plt.show()
+
+sys.exit(0)
