@@ -41,7 +41,7 @@ clusterid_not_found = []
 for i in range(cluster_min+1,cluster_max+1):
     
     # To check a specific cluster
-    if (i!=10):
+    if (i!=31):
         continue
 
     print("dealing with cluster " + str(i))
@@ -65,17 +65,15 @@ for i in range(cluster_min+1,cluster_max+1):
     # Testing compute_shape
     found = False
     try:
-        shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.5, k=None)
+        shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.5, k=5)
         found = True
     except:
         traceback.print_exc()
 
     # In order to visualize cluster points and generated footprint
     # plt.scatter(X, Y)
-    tri = Delaunay(cluster_xy)
-    plt.triplot(X, Y, tri.simplices,linewidth=0.5)
-    if found:
-        plt.plot(*shape.exterior.xy, color="red", linewidth=2)
-    plt.show()
-
-sys.exit(0)
+    # tri = Delaunay(cluster_xy)
+    # plt.triplot(X, Y, tri.simplices,linewidth=0.5)
+    # if found:
+    #     plt.plot(*shape.exterior.xy, color="red", linewidth=2)
+    # plt.show()
