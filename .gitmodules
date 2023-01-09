@@ -4,3 +4,6 @@
 [submodule "pymintriangle"]
 	path = pymintriangle
 	url = https://github.com/Geodan/pymintriangle.git
+[submodule "building-boundary"]
+	path = building-boundary
+	url = https://github.com/esgn/building-boundary.git
