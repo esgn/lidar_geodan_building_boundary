@@ -3,5 +3,5 @@ laspy[lazrs,laszip]
 numpy==1.23.1
 geopandas
 # Necessary to visualize results from scripts directly
-# matplotlib
+matplotlib
 # open3D

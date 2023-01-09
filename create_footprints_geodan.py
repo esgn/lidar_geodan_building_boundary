@@ -37,8 +37,8 @@ else:
 for i in range(cluster_min+1,cluster_max+1):
     
     # To check a specific cluster
-    if (i!=139) and (i!=72):
-        continue
+    # if (i!=139) and (i!=72):
+    #     continue
 
     print("dealing with cluster " + str(i))
     cluster = laz.points[laz.ClusterID == i]
@@ -82,10 +82,10 @@ for i in range(cluster_min+1,cluster_max+1):
             break
 
     # In order to visualize cluster points and generated footprint
-    p = Polygon(vertices)
-    plt.plot(*p.exterior.xy)
-    plt.scatter(X, Y)
-    plt.show()
+    # p = Polygon(vertices)
+    # plt.plot(*p.exterior.xy)
+    # plt.scatter(X, Y)
+    # plt.show()
 
 print(polygons)
 s = gpd.GeoSeries(polygons.values(),crs="epsg:2154")
