@@ -68,10 +68,10 @@ for i in range(cluster_min+1,cluster_max+1):
         try: 
             vertices = building_boundary.trace_boundary(
                 cluster_xy,
-                ransac_threshold=0.75,
-                max_error=0.8,
+                ransac_threshold=0.3,
+                max_error=0.4,
                 alpha=alpha,
-                num_points=5,
+                num_points=10,
                 merge_distance=0.6
             )
             polygons[i] = Polygon(vertices)
@@ -90,10 +90,10 @@ for i in range(cluster_min+1,cluster_max+1):
         try: 
             vertices = building_boundary.trace_boundary(
                 cluster_xy,
-                ransac_threshold=0.75,
-                max_error=0.8,
-                k=10,
-                num_points=5,
+                ransac_threshold=0.3,
+                max_error=0.4,
+                k=5,
+                num_points=10,
                 merge_distance=0.6
             )
             polygons[i] = Polygon(vertices)

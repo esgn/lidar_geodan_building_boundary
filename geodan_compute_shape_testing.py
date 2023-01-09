@@ -41,8 +41,8 @@ clusterid_not_found = []
 for i in range(cluster_min+1,cluster_max+1):
     
     # To check a specific cluster
-    if (i!=31):
-        continue
+    # if (i!=31):
+    #     continue
 
     print("dealing with cluster " + str(i))
     cluster = laz.points[laz.ClusterID == i]
@@ -65,11 +65,45 @@ for i in range(cluster_min+1,cluster_max+1):
     # Testing compute_shape
     found = False
     try:
-        shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.5, k=5)
+        shape = building_boundary.shapes.fit.compute_shape(cluster_xy, alpha=0.8, k=None)
+        boundary_points = np.array(shape.exterior.coords)
+        segments = building_boundary.core.segmentation.boundary_segmentation(boundary_points, 0.3)
+        boundary_segments_0 = [building_boundary.core.segment.BoundarySegment(s) for s in segments]
+        primary_orientations =  building_boundary.core.regularize.get_primary_orientations(
+            boundary_segments_0,
+            5,
+            angle_epsilon=0.05
+        )
+        boundary_segments_1 = building_boundary.core.regularize.regularize_segments(boundary_segments_0,
+            primary_orientations,
+            max_error=0.4)
+        boundary_segments_2 = building_boundary.core.merge.merge_segments(boundary_segments_1,
+            angle_epsilon=0.05,
+            max_distance=0.6,
+            max_error=0.4)
+        vertices = building_boundary.core.intersect.compute_intersections(boundary_segments_2,
+            perp_dist_weight=3)
         found = True
     except:
         traceback.print_exc()
 
+    for s in boundary_segments_0:
+        plt.plot(s.points[:, 0], s.points[:,1])
+    plt.show()
+
+    for s in boundary_segments_1:
+        plt.plot(s.points[:, 0], s.points[:,1])
+    plt.show()
+  
+    for s in boundary_segments_2:
+        plt.plot(s.points[:, 0], s.points[:,1])  
+    plt.show()
+
+    polygon = Polygon(vertices)
+    plt.plot(*polygon.exterior.xy, color="red", linewidth=2)
+    plt.show()
+
+    sys.exit(0)
     # In order to visualize cluster points and generated footprint
     # plt.scatter(X, Y)
     # tri = Delaunay(cluster_xy)
