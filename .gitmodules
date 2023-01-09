@@ -1,6 +1,3 @@
-[submodule "building-boundary"]
-	path = building-boundary
-	url = https://github.com/Geodan/building-boundary
 [submodule "concave-hull"]
 	path = concave-hull
 	url = https://github.com/Geodan/concave-hull.git
