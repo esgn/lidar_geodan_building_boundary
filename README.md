@@ -9,7 +9,7 @@ python3 -m pip install -U pip
 python3 -m pip install concave-hull/
 python3 -m pip install pymintriangle/
 python3 -m pip install building-boundary/
-pip3 install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 It might be necessary to install `libflann-dev` if not present on your system to build concave-hull (`sudo apt install libflann-dev`)
 
